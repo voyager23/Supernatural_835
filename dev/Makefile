@@ -14,6 +14,6 @@ else
 endif
 
 gcd:
-	gcc gcd.c -g -lgmp -o gcd
+	g++ gcd.cxx -g -lgmpxx -lgmp -o gcdxx
 	
 

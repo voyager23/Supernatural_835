@@ -26,10 +26,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <gmp.h>
+//~ #include <numeric>
+//~ #include <gmp.h>
+#include <gmpxx.h>
 
 int main(int argc, char **argv)
 {
+	//~ (void) std::gcd(56,98); // C version
 	mpz_t Tn,T2,T1;
     mpz_inits(Tn,T2,T1,NULL);
     

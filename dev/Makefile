@@ -1,6 +1,9 @@
 UNAME := $(shell uname)
 SOURCE = a_dev.c
 
+superplus:
+	g++ a_dev.c -std=c++17 -lgmpxx -lgmp -o superplus
+	
 super:
 ifeq ($(UNAME),Darwin)
 	@echo "Macbook"
@@ -9,3 +12,8 @@ else
 	@echo "Assuming Linux"
 	gcc $(SOURCE) -g -lgmp -o super
 endif
+
+gcd:
+	gcc gcd.c -g -lgmp -o gcd
+	
+

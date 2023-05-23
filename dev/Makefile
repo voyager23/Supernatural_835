@@ -1,8 +1,13 @@
 UNAME := $(shell uname)
 SOURCE = a_dev.c
 
+aira:	a_aira.cxx
+	g++ a_aira.cxx -std=c++17 -lgmpxx -lgmp -o aira
+	
+
 superplus:
 	g++ a_dev.c -std=c++17 -lgmpxx -lgmp -o superplus
+	
 	
 super:
 ifeq ($(UNAME),Darwin)

@@ -1,5 +1,4 @@
 /*
- * gcd.c
  * 
  * Copyright 2023 mike <mike@pop-os>
  * 
@@ -18,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- * 
+ *	a_aira.cxx 
  */
 
 #include <stdbool.h>
@@ -27,58 +26,26 @@
 #include <stdio.h>
 #include <gmpxx.h>
 
-// Recursive function to return gcd of a and b
-int gcd(int a, int b)
-{
-	// Everything divides 0
-	if (a == 0)
-		return b;
-	if (b == 0)
-		return a;
 
-	// Base case
-	if (a == b)
-		return a;
-
-	// a is greater
-	if (a > b)
-		return gcd(a - b, b);
-	return gcd(a, b - a);
-}
-
-// Driver code
 int main()
 {
-	mpz_class r,a,b,x,y,z;
-	for(a = 1; a < 10; a++)
-		for(b = a+1; b < 10; b+=2)
+	mpz_class r,a,b,x,y,z,p;
+	for(a = 1; a < 20; a++)
+		for(b = a+1; b < 100; b+=2)
 			{
 				r = gcd(a,b);
-				if(r == 1)
+				if (r == 1U)
 				{
-					gmp_printf("\na:%Zd,b:%Zd\n",a,b);
 					x = 2*a*b;
 					y = b*b - a*a;
 					z = a*a + b*b;
-					gmp_printf("%Zd,%Zd,%Zd\n",x,y,z);
-					if(abs(x-y) == 1)
-					{
-						printf("x-y\n");
-					} else {
-						if(abs(x-z) == 1)
+					if((abs(x-y) == 1)||(abs(x-z) == 1)||(abs(y-z) == 1))
 						{
-							printf("x-z\n");
-						} else
-							if(abs(y-z) == 1)
-							{
-								printf("y-z\n");
-							}
-							
+							p = (x+y+z);
+						gmp_printf("%Zd,%Zd,%Zd,%Zd\n",x,y,z,p);
+						}
 				}
 			}
-		}
-
-	return 0;
 }
 
 

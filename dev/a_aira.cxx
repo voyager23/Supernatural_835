@@ -26,12 +26,28 @@
 #include <stdio.h>
 #include <gmpxx.h>
 
+void find_ab(mpz_class* a,mpz_class* b,mpz_class x,mpz_class y,mpz_class z)
+{
+	*b = sqrt((y + z) / 2);
+	
+	*a = x / (*b * 2);
+	
+	gmp_printf("a: %Zd  b: %Zd\n",a,b);
+}
+
 
 int main()
 {
 	mpz_class r,a,b,x,y,z,p;
-	for(a = 1; a < 20; a++)
-		for(b = a+1; b < 100; b+=2)
+	x = 137904;
+	y = 137903;
+	z = 195025;
+	find_ab(&a,&b,x,y,x);
+	gmp_printf("a: %Zd  b: %Zd\n",a,b);
+	exit(0);
+	
+	for(a = 169; a < 170; a++)
+		for(b = a+1; b < 500; b+=2)
 			{
 				r = gcd(a,b);
 				if (r == 1U)

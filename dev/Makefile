@@ -1,8 +1,8 @@
 UNAME := $(shell uname)
 SOURCE = a_dev.c
 
-aira:	a_aira.cxx
-	g++ a_aira.cxx -std=c++17 -lgmpxx -lgmp -o aira
+bira:	b_aira.cxx
+	g++ b_aira.cxx -std=c++17 -lgmpxx -lgmp -o bira
 	
 
 superplus:

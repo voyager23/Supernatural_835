@@ -45,7 +45,7 @@ int main()
 	Pell[1] = 2U;
 	Pell[2] = 1U;
 
-	for(a = 1; a < 100; a++)
+	for(a = 1; a < 1000000; a++)
 	{
 		b = a+1;
 		if (gcd(a,b) == 1U)
@@ -55,9 +55,9 @@ int main()
 			z = a*a + b*b;
 			if((abs(x-y) == 1)||(abs(x-z) == 1)||(abs(y-z) == 1))
 			{
-				gmp_printf("x:%Zd, y:%Zd, z:%Zd,	a:%Zd, b:%Zd\n",x,y,z,a,b);
+				//gmp_printf("x:%Zd, y:%Zd, z:%Zd,	a:%Zd, b:%Zd\n",x,y,z,a,b);
 				S = S + (x+y+z);
-				S = (S % 10000U);
+				S = (S % 10000000U);
 			}
 			// check for outlier
 			if(a == Pell[0])
@@ -74,9 +74,9 @@ int main()
 				z = a*a + b*b;
 				if((abs(x-y) == 1)||(abs(x-z) == 1)||(abs(y-z) == 1))
 				{
-					gmp_printf("		x:%Zd, y:%Zd, z:%Zd,	a:%Zd, b:%Zd\n",x,y,z,a,b);
+					//gmp_printf("		x:%Zd, y:%Zd, z:%Zd,	a:%Zd, b:%Zd\n",x,y,z,a,b);
 					S = S + (x+y+z);
-					S = (S % 10000U);
+					S = (S % 100000000U);
 				}
 			}
 		}

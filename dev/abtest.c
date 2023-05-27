@@ -1,4 +1,5 @@
 /*
+ * abtest.c
  * 
  * Copyright 2023 mike <mike@pop-os>
  * 
@@ -17,48 +18,39 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- *	b_aira.cxx 
+ * 
  */
 
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
+
 #include <stdio.h>
-#include <gmpxx.h>
+#include <stdlib.h>
 
-void find_ab(mpz_class* a,mpz_class* b,mpz_class x,mpz_class y,mpz_class z)
+int main(int argc, char **argv)
 {
-	*b = sqrt((y + z) / 2);
-	
-	*a = x / (*b * 2);
-	
-	gmp_printf("a: %Zd  b: %Zd\n",a,b);
-}
-
-
-int main()
-{
-	mpz_class r,a,b,x,y,z,p,S;
-
-	for(a = 1; a < 100; a++)
-		for(b = a+1; b < (a*3); b+=2)
+	unsigned a,b,lhs,rhs;
+	for(unsigned delta = 1; delta < 6; ++delta)
+	{
+		printf("delta: %u\n",delta);
+		for(a = 1; a < 51; ++a)
+		{
+			for(b = a+1; b < 52; b ++)
 			{
-				if (gcd(a,b) == 1U)
+				lhs = (2*a*b - b*b);
+				rhs = (a*a - delta*delta);
+				//printf("lhs: %u		rhs: %u\n",lhs,rhs);
+				if (lhs == rhs)
 				{
-					x = 2*a*b;
-					y = b*b - a*a;
-					z = a*a + b*b;
-					if((abs(x-y) == 1)||(abs(x-z) == 1)||(abs(y-z) == 1))
-						{
-							p = (x+y+z);
-							if (p > 10,000,000,000UL) break;
-						S = S + p;
-						gmp_printf("x:%Zd, y:%Zd, z:%Zd,	p:%Zd     a:%Zd, b:%Zd\n",x,y,z,p,a,b);
-						}
+					printf("\nType 1 solution a:%u b:%u\n",a,b);
+				}
+				lhs *= -1;
+				rhs *= -1;
+				if (lhs == rhs)
+				{
+					printf("Type 2 solution a:%u b:%u\n",a,b);
 				}
 			}
-	gmp_printf("\nS(%Zd)\n",S);
+		}
+	}
+	return 0;
 }
-
-
 

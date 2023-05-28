@@ -35,17 +35,20 @@ void find_ab(mpz_class* a,mpz_class* b,mpz_class x,mpz_class y,mpz_class z)
 	gmp_printf("a: %Zd  b: %Zd\n",a,b);
 }
 
+#define T(x) x.get_mpz_t()
 
 int main()
 {
 	mpz_class r,a,b,x,y,z,p,S;
 	mpz_class Pell[3];
 	
+	
 	Pell[0] = 5U;
 	Pell[1] = 2U;
 	Pell[2] = 1U;
+	
 
-	for(a = 1; a < 1000000; a++)
+	for(a = 1; a < 100; a++)
 	{
 		b = a+1;
 		if (gcd(a,b) == 1U)
@@ -55,34 +58,31 @@ int main()
 			z = a*a + b*b;
 			if((abs(x-y) == 1)||(abs(x-z) == 1)||(abs(y-z) == 1))
 			{
-				//gmp_printf("x:%Zd, y:%Zd, z:%Zd,	a:%Zd, b:%Zd\n",x,y,z,a,b);
 				S = S + (x+y+z);
-				S = (S % 10000000U);
+				gmp_printf("x:%Zd, y:%Zd, z:%Zd,	a:%Zd, b:%Zd  p:%Zd\n",T(x),T(y),T(z),T(a),T(b),T(S));
+				S = (S % 1234567891U);
 			}
-			// check for outlier
-			if(a == Pell[0])
-			{
-				// calc next Pell number
-				Pell[2] = Pell[1];
-				Pell[1] = Pell[0];
-				Pell[0] = 2 * Pell[1] + Pell[2];
-				// set b = Pell
-				b = Pell[0];
-				// repeat test
-				x = 2*a*b;
-				y = b*b - a*a;
-				z = a*a + b*b;
-				if((abs(x-y) == 1)||(abs(x-z) == 1)||(abs(y-z) == 1))
-				{
-					//gmp_printf("		x:%Zd, y:%Zd, z:%Zd,	a:%Zd, b:%Zd\n",x,y,z,a,b);
-					S = S + (x+y+z);
-					S = (S % 100000000U);
-				}
-			}
+			//~ // check for outlier
+			//~ if(a == Pell[0])
+			//~ {
+				//~ // calc next Pell number
+				//~ Pell[2] = Pell[1];
+				//~ Pell[1] = Pell[0];
+				//~ Pell[0] = 2 * Pell[1] + Pell[2];
+				//~ // set b = Pell
+				//~ b = Pell[0];
+				//~ // repeat test
+				//~ x = 2*a*b;
+				//~ y = b*b - a*a;
+				//~ z = a*a + b*b;
+				//~ if((abs(x-y) == 1)||(abs(x-z) == 1)||(abs(y-z) == 1))
+				//~ {
+					//~ gmp_printf("x:%Zd, y:%Zd, z:%Zd,	a:%Zd, b:%Zd\n",T(x),T(y),T(z),T(a),T(b));
+					//~ S = S + (x+y+z);
+					//~ S = (S % 1234567891U);
+				//~ }
+			//~ }
 		}
 	}
-	gmp_printf("Perimeter Sum = %Zd\n",S);
+	gmp_printf("Perimeter Sum = %Zd\n",T(S));
 }
-
-
-
